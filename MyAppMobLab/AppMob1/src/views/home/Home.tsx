@@ -11,12 +11,12 @@ export const HomeScreen = () => {
     return (
         <View style={styles.container}>
             <Image
-                source={require('./assets/chef.jpg')}
+                source={require('../../.../../../assets/chef.jpg')}
                 style={styles.imageBackground}
             />
             <View style={styles.logoContainer}>
                 <Image
-                    source={require('./assets/logo.png')}
+                    source={require('../../../assets/logo.png')}
                     style={styles.logoImage}
                 />
                 <Text style={styles.logoText}>FOOD APP</Text>
@@ -25,7 +25,7 @@ export const HomeScreen = () => {
                 <Text style={styles.formText}>INGRESAR</Text>
                 <View style={styles.formInput}>
                     <Image style={styles.formIcon}
-                           source={require('./assets/email.png')}
+                           source={require('../../../assets/email.png')}
                     />
                     <TextInput
                         style={styles.formTextInput}
@@ -35,7 +35,7 @@ export const HomeScreen = () => {
                 </View>
                 <View style={styles.formInput}>
                     <Image style={styles.formIcon}
-                           source={require('./assets/password.png')}
+                           source={require('../../../assets/password.png')}
                     />
                     <TextInput
                         style={styles.formTextInput}
@@ -46,7 +46,7 @@ export const HomeScreen = () => {
                 </View>
                 <View style={{ marginTop: 30 }}>
                     <RoundedButton text='ENTRAR' onPress={() =>
-                        ToastAndroid.show('HOLA!', ToastAndroid.SHORT)} />
+                        ToastAndroid.show('holis', ToastAndroid.SHORT)} />
                 </View>
                 <View style={styles.formRegister}>
                     <Text>¿No tienes cuenta?</Text>
