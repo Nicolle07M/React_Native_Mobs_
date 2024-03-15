@@ -5,9 +5,14 @@ import { View, Text, StyleSheet, Image, TextInput, ToastAndroid, Touchable,
 import { RoundedButton } from '../../components/RoundedButton';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../App';
+
 export const HomeScreen = () => {
-    const navigation =
-        useNavigation<StackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+    const handleRegisterPress = () => {
+        navigation.navigate('RegisterScreen'); 
+    };
+
     return (
         <View style={styles.container}>
             <Image
@@ -49,9 +54,11 @@ export const HomeScreen = () => {
                         ToastAndroid.show('holis', ToastAndroid.SHORT)} />
                 </View>
                 <View style={styles.formRegister}>
-                    <Text>¿No tienes cuenta?</Text>
+                <Text>¿No tienes cuenta?</Text>
+                <TouchableOpacity onPress={handleRegisterPress}>
                     <Text style={styles.formRegisterText}>Regístrate</Text>
-                </View>
+                </TouchableOpacity>
+            </View>
             </View>
         </View>
     );
