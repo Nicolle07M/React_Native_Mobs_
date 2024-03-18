@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import HomeStyles from "../home/Styles";
 
-const styles = StyleSheet.create({
+
+const RegisterStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'black',
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeStyles;
+export default RegisterStyles;

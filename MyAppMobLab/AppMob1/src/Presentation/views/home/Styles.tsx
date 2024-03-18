@@ -2,30 +2,30 @@ import { StyleSheet } from "react-native";
 
 
 const HomeStyles = StyleSheet.create({
- container: {
- flex: 1,
- backgroundColor: 'black',
- },
- imageBackground: {
- width: '100%',
- height: '100%',
- opacity: 0.7,
- bottom: '30%',
- },
- form: {
- width: '100%',
- height: '40%',
- backgroundColor: 'white',
- position: 'absolute',
- bottom: 0,
- borderTopLeftRadius: 40,
- borderTopRightRadius: 40,
- padding: 30,
- },
- formText: {
- fontWeight: 'bold',
- fontSize: 16,
- },
+    container: {
+        flex: 1,
+        backgroundColor: 'black',
+    },
+    imageBackground: {
+        width: '100%',
+        height: '100%',
+        opacity: 0.7,
+        bottom: '30%',
+     },
+    form: {
+        width: '100%',
+        height: '40%',
+        backgroundColor: 'white',
+        position: 'absolute',
+        bottom: 0,
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        padding: 30,
+    },
+    formText: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    },
  formRegister: {
  flexDirection: 'row',
  justifyContent: 'center',
