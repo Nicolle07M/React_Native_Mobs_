@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import useViewModel from './viewModel';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, StyleSheet, Image, TextInput, ToastAndroid, Touchable, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, ToastAndroid, Touchable, TouchableOpacity, ScrollView } from 'react-native';
 import { RoundedButton } from '../../components/RoundedButton';
 import { CustomTextInput } from '../../components/CustomTextInput';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -26,6 +26,7 @@ export const RegisterScreen = () => {
     <Text style={styles.logoText}>SELECCIONA UNA IMAGEN</Text>
         </View>
             <View style={styles.form}>
+        <ScrollView>
             <Text style={styles.formText}>REGISTRARSE</Text>
 
         <CustomTextInput
@@ -82,6 +83,7 @@ export const RegisterScreen = () => {
  <View style={{ marginTop: 30 }}>
         <RoundedButton text='CONFIRMAR' onPress={() => register()} />
  </View>
+ </ScrollView>
  </View>
  </View>
  );
