@@ -18,7 +18,6 @@ export const HomeScreen = () => {
                     source={require('../../../../assets/chef.jpg')}
                     style={styles.imageBackground}
                 />
-
  <View style={styles.logoContainer}>
     <Image
         source={require('../../../../assets/logo.png')}
