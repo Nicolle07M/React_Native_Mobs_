@@ -1,102 +1,114 @@
 import React, { useEffect } from 'react'
-import { View, Text, Image, ScrollView, ToastAndroid } from 'react-native'
+import { Image, View, Text, ScrollView, ToastAndroid } from 'react-native';
+import { CustomTextInput } from '../../components/CustomTextInput';
 import { RoundedButton } from '../../components/RoundedButton';
 import useViewModel from '../register/viewModel';
-import { CustomTextInput } from '../../components/CustomTextInput';
 import styles from './Styles';
-
 
 export const RegisterScreen = () => {
 
-    const { name, lastname, email, phone, password, confirmPassword,
-        errorMessage, onChange, register } = useViewModel();
- //Para saber si la variable ya tiene establecido un valor
+  const { name, lastname, email, phone, password, confirmPassword, errorMessage, onChange, register } = useViewModel();
+  
+  useEffect(() => {
+    if (errorMessage != '') {
+      ToastAndroid.show(errorMessage, ToastAndroid.LONG);
+    }
+  }, [errorMessage])
+  
 
-    useEffect(() => {
-        if (errorMessage !== '')
-        ToastAndroid.show(errorMessage, ToastAndroid.LONG)
-    }, [errorMessage]);
-
-    return (
-        <View style={styles.container}>
+  return (
+    // COLUMN
+    <View style={styles.container}>
         <Image
-        source={require('../../../../assets/chef.jpg')}
-        style={styles.imageBackground}
-        />
+          source={ require('../../../../assets/chef.jpg') } 
+          style={ styles.imageBackground }
+          />
 
-        <View style={styles.logoContainer}>
-        <Image
-        source={require('../../../../assets/user_image.png')}
-        style={styles.logoImage}
-        />
+        <View style={ styles.logoContainer }>
+          <Image 
+              source={ require('../../../../assets/user_image.png') }
+              style={ styles.logoImage }
+          />
 
-        <Text style={styles.logoText}>SELECCIONA UNA IMAGEN</Text>
+          <Text style={ styles.logoText }>SELECCIONA UNA IMAGEN</Text>
         </View>
-        <View style={styles.form}>
 
-        <ScrollView>
-            <Text style={styles.formText}>REGISTRARSE</Text>
-            <CustomTextInput
-            image={require('../../../../assets/user.png')}
-            placeholder='Nombres'
-            value={name}
-            keyboardType='default'
-            property='name'
-            onChangeText={onChange}
-            />
+        <View style={ styles.form }>
 
-            <CustomTextInput
-            image={require('../../../../assets/my_user.png')}
-            placeholder='Apellidos'
-            value={lastname}
-            keyboardType='default'
-            property='lastname'
-            onChangeText={onChange}
-            />
+          <ScrollView>
 
-            <CustomTextInput
-            image={require('../../../../assets/email.png')}
-            placeholder='Correo electrónico'
-            value={email}
-            keyboardType='email-address'
-            property='email'
-            onChangeText={onChange}
-            />
+            <Text style={ styles.formText }>REGISTRARSE</Text>
 
-            <CustomTextInput
-            image={require('../../../../assets/phone.png')}
-            placeholder='Teléfono'
-            value={phone}
-            keyboardType='numeric'
-            property='phone'
-            onChangeText={onChange}
-            />
+            <CustomTextInput 
+              placeholder='Nombres'
+              keyboardType='default'
+              image={ require('../../../../assets/user.png') }
+              property='name'
+              onChangeText={ onChange }
+              value={ name }
+              />
 
-            <CustomTextInput
-            image={require('../../../../assets/password.png')}
-            placeholder='Contraseña'
-            value={password}
-            keyboardType='default'
-            secureTextEntry={true}
-            property='password'
-            onChangeText={onChange}
-            />
 
-            <CustomTextInput
-            image={require('../../../../assets/confirm_password.png')}
-            placeholder='Confirmar contraseña'
-            value={confirmPassword}
-            keyboardType='default'
-            secureTextEntry={true}
-            property='confirmPassword'
-            onChangeText={onChange}
-            />
+            <CustomTextInput 
+              placeholder='Apellidos'
+              keyboardType='default'
+              image={ require('../../../../assets/my_user.png') }
+              property='lastname'
+              onChangeText={ onChange }
+              value={ lastname }
+              />
+            
+            <CustomTextInput 
+              placeholder='Correo electronico'
+              keyboardType='email-address'
+              image={ require('../../../../assets/email.png') }
+              property='email'
+              onChangeText={ onChange }
+              value={ email }
+              />
 
-        <View style={{ marginTop: 30 }}>
-            <RoundedButton text='GUARDAR' onPress={() => register()}/>
-         </View>
-        </ScrollView>
- </View>
- </View>
- );
+            <CustomTextInput 
+              placeholder='Telefono'
+              keyboardType='numeric'
+              image={ require('../../../../assets/phone.png') }
+              property='phone'
+              onChangeText={ onChange }
+              value={ phone }
+              />
+            
+            <CustomTextInput 
+              placeholder='Contraseña'
+              keyboardType='default'
+              image={ require('../../../../assets/password.png') }
+              property='password'
+              onChangeText={ onChange }
+              value={ password }
+              secureTextEntry={ true }
+              />
+            
+            <CustomTextInput 
+              placeholder='Confirmar Contraseña'
+              keyboardType='default'
+              image={ require('../../../../assets/confirm_password.png') }
+              property='confirmPassword'
+              onChangeText={ onChange }
+              value={ confirmPassword }
+              secureTextEntry={ true }
+              />
+
+            <View style={{ marginTop: 30 }}>
+                
+                <RoundedButton text='CONFIRMAR' onPress={ () => register()} />
+
+            </View>
+
+          </ScrollView>
+
+        </View>
+        
+    </View>
+    );
 }
+    
+// HOT RELOAD
+

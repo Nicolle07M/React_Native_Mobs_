@@ -1,71 +1,69 @@
-import React, { useState } from "react"
-import { ApiDelivery } from "../../../Data/sources/remote/api/ApiDelivery";
-import { RegisterAuthUseCase } from "../../../Domain/useCases/auth/RegisterAuth";
+import React, { useState } from 'react';
+import { ApiDelivery } from '../../../Data/sources/remote/api/ApiDelivery';
+import { RegisterAuthUseCase } from '../../../Domain/useCases/auth/RegisterAuth';
+
 const RegisterViewModel = () => {
-   const [errorMessage, setErrorMessage] = useState('');
-         const [values, setValues] = useState({
-         name: '',
-         lastname: '',
-         email: '',
-         phone: '',
-         password: '',
-         confirmPassword: ''
-         });
-         
-   const onChange = (property: string, value: any) => {
-         setValues({ ...values, [property]: value });
-      }
 
+    const [errorMessage, setErrorMessage] = useState('');
+    const [values, setValues] = useState({
+        name: '',
+        lastname: '',
+        phone: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    });
 
-   const register = async () => {
-   if (!isValidForm()) {
-      const response = await RegisterAuthUseCase(values);
-      console.log('Result' + JSON.stringify(response));
-      }
-   }
-   const isValidForm = (): boolean => {
-   if (values.name === '') {
-      setErrorMessage('El nombre es requerido');
-      return false;
-   }
+    const onChange = (property: string, value: any) => {
+        setValues({ ...values, [property]: value })
+    }
 
-   if (values.lastname === '') {
-      setErrorMessage('El apellido es requerido');
-      return false;
-   }
+    const register = async () => {
+        if (isValidForm()) {
+            const response = await RegisterAuthUseCase(values);
+            console.log('RESULT: ' + JSON.stringify(response));        
+        }
+    }
 
-   if (values.email === '') {
-      setErrorMessage('El correo es requerido');
-      return false;
-   }
+    const isValidForm = (): boolean => {
+        if (values.name === '') {
+            setErrorMessage('Ingresa tu nombre');
+            return false;
+        }
+        if (values.lastname === '') {
+            setErrorMessage('Ingresa tu apellido');
+            return false;
+        }
+        if (values.email === '') {
+            setErrorMessage('Ingresa tu correo electronico');
+            return false;
+        }
+        if (values.phone === '') {
+            setErrorMessage('Ingresa tu telefono');
+            return false;
+        }
+        if (values.password === '') {
+            setErrorMessage('Ingresa la contraseña');
+            return false;
+        }
+        if (values.confirmPassword === '') {
+            setErrorMessage('Ingresa la confirmacion de la contraseña');
+            return false;
+        }
+        if (values.password !== values.confirmPassword) {
+            setErrorMessage('Las contraseñas no coinciden');
+            return false;
+        }
 
-   if (values.phone === '') {
-      setErrorMessage('El teléfono es requerido');
-      return false;
-   }
+        return true;
+    }
 
-   if (values.password === '') {
-      setErrorMessage('La contraseña es requerida');
-      return false;
-   }
+    return {
+        ...values,
+        onChange,
+        register,
+        errorMessage
+    }
+}
 
-   if (values.confirmPassword === '') {
-      setErrorMessage('La confirmación de contraseña es requerida');
-      return false;
-   }
-
-   if (values.password !== values.confirmPassword) {
-      setErrorMessage('Las contraseñas no coinciden');
-      return false;
-   }
-      return true;
-   }
-      return {
-         ...values,
-         onChange,
-         register,
-         errorMessage
-      }
-  }
-
-  export default RegisterViewModel; 
+export default RegisterViewModel;

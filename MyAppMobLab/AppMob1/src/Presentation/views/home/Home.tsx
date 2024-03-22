@@ -9,9 +9,11 @@ import { CustomTextInput } from '../../components/CustomTextInput';
 import styles from './Styles';
 
 export const HomeScreen = () => {
+
     const {email, password, onChange} = useViewModel();
-    const navigation =
-    useNavigation<StackNavigationProp<RootStackParamList>>();
+
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
         return (
             <View style={styles.container}>
                 <Image
@@ -56,6 +58,7 @@ export const HomeScreen = () => {
  </View>
     <View style={styles.formRegister}>
     <Text>¿No tienes cuenta?</Text>
+    
     <TouchableOpacity onPress={() =>
     navigation.navigate('RegisterScreen')}>
  <Text
