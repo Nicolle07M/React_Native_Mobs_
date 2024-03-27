@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
-import { Image, View, Text, ScrollView, ToastAndroid } from 'react-native';
+import { Image, View, Text, ScrollView, ToastAndroid, TouchableOpacity } from 'react-native';
 import { CustomTextInput } from '../../components/CustomTextInput';
 import { RoundedButton } from '../../components/RoundedButton';
 import useViewModel from '../register/viewModel';
 import styles from './Styles';
 
+
 export const RegisterScreen = () => {
 
-  const { name, lastname, email, phone, password, confirmPassword, errorMessage, onChange, register } = useViewModel();
+  const { name, lastname, email, phone, image, password, confirmPassword, errorMessage, onChange, register, pickImage } = useViewModel();
   
   useEffect(() => {
     if (errorMessage != '') {
@@ -25,10 +26,21 @@ export const RegisterScreen = () => {
           />
 
         <View style={ styles.logoContainer }>
-          <Image 
+          <TouchableOpacity onPress={() => pickImage()}> 
+          {
+            image == ''
+            ?
+            <Image 
               source={ require('../../../../assets/user_image.png') }
               style={ styles.logoImage }
-          />
+            />
+          :
+            <Image 
+              source={{uri: image}}
+              style={styles.logoImage}
+            />
+          }
+          </TouchableOpacity>
 
           <Text style={ styles.logoText }>SELECCIONA UNA IMAGEN</Text>
         </View>
