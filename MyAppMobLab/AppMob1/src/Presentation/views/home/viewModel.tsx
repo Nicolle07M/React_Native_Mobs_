@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LoginAuthUseCase } from '../../../Domain/useCases/auth/Login.Auth';
 import { SaveUserLocalUseCase } from '../../../Domain/useCases/userLocal/SaveUserLocal';
 import { GetUserLocalUseCase } from '../../../Domain/useCases/userLocal/GetUserLocal';
+import { useUserLocal } from '../../hooks/useUserLocal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const HomeViewModel = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -10,18 +13,15 @@ const HomeViewModel = () => {
     password: ''
   });
 
-  const onChange = (property: string, value: any) => {
-    setValues({...values, [property]: value});
-  };
+  const { user, getUserSession } = useUserLocal();
 
   useEffect(() => {
     getUserSession();
   }, []);
 
-  const getUserSession = async () => {
-    const user = await GetUserLocalUseCase();
-    console.log('Usuario Sesión: ' + JSON.stringify(user));
-  };
+  const onChange = (property: string, value: any) => {
+    setValues({...values, [property]: value});
+  }
 
   const login = async () => {
     if (isValidForm()) {
@@ -31,10 +31,10 @@ const HomeViewModel = () => {
         setErrorMessage(response.message);
       } else {
         await SaveUserLocalUseCase(response.data);
+        getUserSession();
       }
     }
   };
-  
 
   const isValidForm = () => {
     if (values.email === '') {
@@ -46,14 +46,16 @@ const HomeViewModel = () => {
       return false;
     }
     return true;
-  };
+  }
 
   return {
     ...values,
+    user,
     onChange,
     login,
-    errorMessage
-  };
-};
+    errorMessage,
+  }
+}
 
 export default HomeViewModel;
+

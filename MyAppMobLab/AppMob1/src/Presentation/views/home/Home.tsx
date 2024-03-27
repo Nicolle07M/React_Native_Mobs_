@@ -1,28 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { View, Text, Image, ToastAndroid, TouchableOpacity } from 'react-native';
-import { RoundedButton } from '../../../Presentation/components/RoundedButton';
-import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, ToastAndroid } from 'react-native';
+import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../../App';
 import useViewModel from '../home/viewModel';
 import { CustomTextInput } from '../../components/CustomTextInput';
-import styles from './Styles';
+import { RoundedButton } from '../../components/RoundedButton';
+import  styles  from '../home/Styles'; // Suponiendo que tienes un archivo de estilos separado
 
-export const HomeScreen = () => {
-  const { email, password, errorMessage, onChange, login } = useViewModel();
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+// Definición de las props que recibe el componente
+interface Props extends StackScreenProps<RootStackParamList, 'HomeScreen'> {};
 
+// Componente HomeScreen
+export const HomeScreen = ({ navigation, route }: Props) => {
+  // Obtener datos y funciones del ViewModel
+  const { email, password, errorMessage, user, onChange, login } = useViewModel();
+
+  // Mostrar mensaje de error si hay uno
   useEffect(() => {
     if (errorMessage !== '') {
       ToastAndroid.show(errorMessage, ToastAndroid.LONG);
     }
   }, [errorMessage]);
 
+  // Redireccionar si hay un usuario logueado
+  useEffect(() => {
+    if (user?.id !== null && user?.id !== undefined) {
+      navigation.replace('ProfileInfoScreen');
+    }
+  }, [user]);
+
+  // Renderizar el componente
   return (
     <View style={styles.container}>
-      <Image source={require('../../../../assets/chef.jpg')} style={styles.imageBackground} />
+      <Image
+        source={require('../../../../assets/chef.jpg')}
+        style={styles.imageBackground}
+      />
       <View style={styles.logoContainer}>
-        <Image source={require('../../../../assets/logo.png')} style={styles.logoImage} />
+        <Image
+          source={require('../../../../assets/logo.png')}
+          style={styles.logoImage}
+        />
         <Text style={styles.logoText}>FOOD APP</Text>
       </View>
       <View style={styles.form}>
@@ -50,10 +68,12 @@ export const HomeScreen = () => {
         <View style={styles.formRegister}>
           <Text>¿No tienes cuenta?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
-            <Text style={styles.formRegisterText}>Registrate</Text>
+            <Text style={styles.formRegisterText}>Regístrate</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
 };
+
+export default HomeScreen;
